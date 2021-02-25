@@ -1,0 +1,101 @@
+.wrapper section {
+    margin-bottom: 5rem;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 3rem;
+}
+
+.product {
+    background-color: #FAFAFA;
+
+    width: 79.2rem;
+    height: 20rem;    
+
+    border-radius: 2rem;
+
+    cursor: pointer;
+    transition: 0.4s all;
+
+    box-shadow: 1rem 1rem 2rem gray;
+
+    display: grid;
+    grid-template-columns: 0.7fr 1fr 0.2fr;
+    grid-template-rows: min-content 1fr 1fr 1fr;
+    grid-template-areas: 'img title .'
+                         'img cat .'
+                         'img value .'
+                         'img . action';
+}
+
+.product h1 {
+    grid-area: title;
+}
+
+.product span {
+    grid-area: cat;
+}
+
+.product p {
+    grid-area: value;
+}
+
+.product:hover {
+    transform: scale(1.01);   
+}
+
+.image_container {
+    grid-area: img;
+    position: relative;
+}
+
+.image {
+    border-radius: 2rem;
+}
+
+.title, .category, .price {
+    margin-left: 2rem;
+}
+
+.title {
+    padding-top: 2rem;
+}
+
+.category {
+    color: red;    
+}
+
+.category:hover {
+    text-decoration: underline;
+}
+
+.price {
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.interactions {
+    grid-area: action;
+
+    padding: 0 0.5rem 1rem 0;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#heart:hover {
+    color: red;
+    /* fill: red; */
+}
+
+#cart:hover {
+    color: #dfcf43;
+}
+
+/* #cart {
+    color: tomato;
+} */

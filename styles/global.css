@@ -20,6 +20,12 @@ body, input, button, textarea {
     font: 600 1.8rem 'Nunito', sans-serif;
 }
 
+@media (max-width: 768px) {
+    html {
+       font-size: 60%; 
+    }
+}
+
 @media (max-width: 632px) {
     html {
        font-size: 50%; 
