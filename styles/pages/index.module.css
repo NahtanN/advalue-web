@@ -65,6 +65,7 @@
 }
 
 .category {
+    width: fit-content;
     color: red;    
 }
 

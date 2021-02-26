@@ -15,7 +15,7 @@ export default function Layout() {
         </section>
 
         <section className={styles.search}>
-          <input type="text" className={styles.search_bar}/>
+          <input type="text" className={styles.search_bar} placeholder="Search"/>
           <FiSearch id={styles.search_icon} size={24}/>
         </section>
 
