@@ -1,3 +1,28 @@
+.main {
+    /* height: 84vh; */
+    background-color: #Fafa;
+    display: grid;
+    grid-template-columns: 0.2fr 0.6fr 2fr 0.3fr;
+    grid-template-rows: 0.1fr 0.1fr 1fr;
+
+    grid-template-areas: '. . . .'
+                         '. aside filter .'
+                         '. aside products .';
+}
+
+.aside {
+    grid-area: aside;
+}
+
+.filter {
+    grid-area: filter;
+}
+
+.teste {
+    grid-area: products;
+
+}
+
 .wrapper section {
     margin-bottom: 5rem;
 }

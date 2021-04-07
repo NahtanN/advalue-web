@@ -2,7 +2,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { FiHeart, FiShoppingCart, FiXCircle } from 'react-icons/fi'
 
-import Header from '../components/Header'
+import Header from '../components/header/Header'
+import Aside from '../components/aside/Aside'
+import Filter from '../components/filter/Filter'
 
 import styles from '../styles/pages/index.module.css'
 
@@ -14,8 +16,11 @@ export default function Home() {
         </Head>
 
         <Header />
-
-        <div className={styles.wrapper}>
+        <div className={styles.main}>
+          <Aside style={styles.aside}/>
+          <Filter style={styles.filter}/>
+        </div>
+        {/* <div className={styles.wrapper}>
           <section className={styles.container}>
             <div className={styles.product}>
               <div className={styles.image_container}>
@@ -119,7 +124,7 @@ export default function Home() {
               </div>
             </div>
           </section>
-        </div>
+        </div> */}
       </div>
   )
 }

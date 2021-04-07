@@ -1,5 +1,3 @@
-import Head from 'next/head'
-
 import { FaCrown } from 'react-icons/fa'
 import { FiSearch, FiUser, FiHeart, FiShoppingCart } from 'react-icons/fi'
 
