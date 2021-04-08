@@ -1,14 +1,43 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { FiHeart, FiShoppingCart, FiXCircle } from 'react-icons/fi'
+import React from 'react';
+import { GetStaticProps } from 'next'
+import { useState } from 'react'
 
 import Header from '../components/header/Header'
 import Aside from '../components/aside/Aside'
 import Filter from '../components/filter/Filter'
+import Products, { ProductInterface } from '../components/products/Products'
+import ScrollBackToTop from '../components/scroll/ScrollBackToTop'
 
 import styles from '../styles/pages/index.module.css'
 
-export default function Home() {
+interface Products {
+  current_page: number;
+  prev_page: number;
+  next_page: number;
+  quantity: number;
+  data: Array<ProductInterface>;
+}
+
+interface ComponentProps {
+  products: Products;
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const API = await fetch(process.env.API_URL)
+  const products: Products = await API.json()
+  
+  return {
+    props: {
+      products
+    },
+    revalidate: 5
+  }
+}
+
+const Home: React.FC<ComponentProps> = ({ products }) => {
+  const [ page, setPage ] = useState()
+
   return (
       <div>
         <Head>
@@ -16,115 +45,19 @@ export default function Home() {
         </Head>
 
         <Header />
+
+        <ScrollBackToTop/>
+        
         <div className={styles.main}>
+          
           <Aside style={styles.aside}/>
           <Filter style={styles.filter}/>
+          <Products style={styles.products} products={products.data}/>
+
         </div>
-        {/* <div className={styles.wrapper}>
-          <section className={styles.container}>
-            <div className={styles.product}>
-              <div className={styles.image_container}>
-                  <Image
-                    id="te" 
-                    priority
-                    src="/images/bitcoin.jpeg"                          
-                    layout="fill"
-                    objectFit="fill"
-                    quality={100}
-                    alt="bitcoin"
-                    className={styles.image}
-                  />
-              </div>
-
-              <h1 className={styles.title}>Vitae tortor condimentum lacinia quis vel</h1>
-              <span className={styles.category}>Categoria</span>
-              <p className={styles.price}>$ 300</p>
-
-              <div className={styles.interactions}>
-                <FiHeart id={styles.heart}/>
-                <FiShoppingCart id={styles.cart}/>
-              </div>
-            </div>
-          </section>
-
-          <section className={styles.container}>
-            <div className={styles.product}>
-              <div className={styles.image_container}>
-                  <Image
-                    id="te" 
-                    priority
-                    src="/images/bitcoin.jpeg"                          
-                    layout="fill"
-                    objectFit="fill"
-                    quality={100}
-                    alt="bitcoin"
-                    className={styles.image}
-                  />
-              </div>
-
-              <h1 className={styles.title}>Vitae tortor condimentum lacinia quis vel</h1>
-              <span className={styles.category}>Categoria</span>
-              <p className={styles.price}>$ 300</p>
-
-              <div className={styles.interactions}>
-                <FiHeart id={styles.heart}/>
-                <FiShoppingCart id={styles.cart}/>
-              </div>
-            </div>
-          </section>
-
-          <section className={styles.container}>
-            <div className={styles.product}>
-              <div className={styles.image_container}>
-                  <Image
-                    id="te" 
-                    priority
-                    src="/images/bitcoin.jpeg"                          
-                    layout="fill"
-                    objectFit="fill"
-                    quality={100}
-                    alt="bitcoin"
-                    className={styles.image}
-                  />
-              </div>
-
-              <h1 className={styles.title}>Vitae tortor condimentum lacinia quis vel</h1>
-              <span className={styles.category}>Categoria</span>
-              <p className={styles.price}>$ 300</p>
-
-              <div className={styles.interactions}>
-                <FiHeart id={styles.heart}/>
-                <FiShoppingCart id={styles.cart}/>
-              </div>
-            </div>
-          </section>
-          
-          <section className={styles.container}>
-            <div className={styles.product}>
-              <div className={styles.image_container}>
-                  <Image
-                    id="te" 
-                    priority
-                    src="/images/bitcoin.jpeg"                          
-                    layout="fill"
-                    objectFit="fill"
-                    quality={100}
-                    alt="bitcoin"
-                    className={styles.image}
-                  />
-              </div>
-
-              <h1 className={styles.title}>Vitae tortor condimentum lacinia quis vel</h1>
-              <span className={styles.category}>Categoria</span>
-              <p className={styles.price}>$ 300</p>
-
-              <div className={styles.interactions}>
-                <FiHeart id={styles.heart}/>
-                <FiXCircle id={styles.cart}/>
-              </div>
-            </div>
-          </section>
-        </div> */}
+       
       </div>
   )
 }
+
+export default Home;
