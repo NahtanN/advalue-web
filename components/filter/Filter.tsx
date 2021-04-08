@@ -1,18 +1,25 @@
+import Link from 'next/link'
 import styles from './filter.module.css'
 
 export default function filter({ style }) {
     return (
         <div className={ style }>
             <section className={styles.filter}>
-                <a href="">
-                    <small>All products</small>
-                </a>
-                <a href="">
-                    <small>Low price</small>
-                </a>
-                <a href="">
-                    <small>High price</small>
-                </a>
+                <Link href="">
+                    <a>
+                        <small>All products</small>
+                    </a>
+                </Link>
+                <Link href="">
+                    <a>
+                        <small>Low price</small>
+                    </a>
+                </Link>
+                <Link href="">
+                    <a>
+                        <small>High price</small>
+                    </a>
+                </Link>
             </section>
         </div>
     )

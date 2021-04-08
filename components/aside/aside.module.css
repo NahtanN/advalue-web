@@ -1,4 +1,7 @@
 .categories {
+    position: sticky;
+    top: 5rem;
+    
     width: 20rem;
     height: fit-content;
 
@@ -13,10 +16,13 @@
     font-weight: 100;    
 }
 
-.categories li {
+.categories li a {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    text-decoration: none;
+    color: black;
 
     padding: 1rem;
     transition: 0.1s all;

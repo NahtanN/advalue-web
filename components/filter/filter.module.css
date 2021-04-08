@@ -12,11 +12,12 @@
 }
 
 .filter a {
+    margin: 0 1rem;
     padding-top: 1rem;
     padding-bottom: 1.1rem;
 
     text-decoration: none;
-    color: black;    
+    color: black;
 }
 
 .filter a + a {
@@ -25,5 +26,11 @@
 
 .filter a:first-child {
     color:  #1875f0;
+    font-weight: bold;
     border-bottom: 2px solid blue;
+}
+
+.filter a:hover {
+    color:  #1875f0;
+    transform: scale(1.1);
 }

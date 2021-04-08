@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { FiChevronRight } from 'react-icons/fi'
 
 import styles from './aside.module.css';
@@ -6,29 +7,53 @@ export default function Aside({ style }) {
     return (
         <aside className={style}>
             <ul className={styles.categories}>
-                <li>                                        
-                    Computers
-                    <FiChevronRight id={styles.arrow} size={15} />
+                <li>
+                    <Link href="">
+                        <a >
+                            Computers
+                            <FiChevronRight id={styles.arrow} size={15} />
+                        </a>
+                    </Link>
                 </li>
                 <li>
-                    Acessories
-                    <FiChevronRight size={15} />
+                    <Link href="">
+                        <a >
+                            Acessories
+                            <FiChevronRight id={styles.arrow} size={15} />
+                        </a>
+                    </Link>
                 </li>
                 <li>
-                    Cell Phone
-                    <FiChevronRight size={15} />
+                    <Link href="">
+                        <a >
+                            Cell Phone
+                            <FiChevronRight id={styles.arrow} size={15} />
+                        </a>
+                    </Link>
                 </li>
                 <li>
-                    Books
-                    <FiChevronRight size={15} />
+                    <Link href="">
+                        <a >
+                            Books
+                            <FiChevronRight id={styles.arrow} size={15} />
+                        </a>
+                    </Link>
                 </li>
                 <li>
-                    Sports
-                    <FiChevronRight size={15} />
+                    <Link href="">
+                        <a >
+                            Sports
+                            <FiChevronRight id={styles.arrow} size={15} />
+                        </a>
+                    </Link>
                 </li>
                 <li>
-                    Clothing
-                    <FiChevronRight size={15} />
+                    <Link href="">
+                        <a >
+                            Clothing
+                            <FiChevronRight id={styles.arrow} size={15} />
+                        </a>
+                    </Link>
                 </li>
             </ul>
         </aside>
