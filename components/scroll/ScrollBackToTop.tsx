@@ -1,28 +1,40 @@
+import { useEffect, useState } from 'react'
 import { FiChevronUp } from 'react-icons/fi'
+import getScrollPosition from '../../utils/scrollPosition'
 
 import styles from './scrollBackToTop.module.css'
 
 
 const ScrollBackToTop = () => {
-    const isBrowser = typeof window !== undefined
+  const [scrollPosition, setScrollPosition] = useState(0)
 
-    const getScrollPosition = () => {
-        console.log(typeof window.scrollY)
-        if (window.scrollY === 159) {
-            var scroll = document.getElementById('wrapper')
-            scroll.style.visibility = 'visible'
-        }
+  const listenToScroll = () => {
+    const { winScroll } = getScrollPosition()
+
+    setScrollPosition(winScroll)
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', listenToScroll)
+  }, [])
+
+  useEffect(() => {
+    var scrollBackToTop = document.getElementById('wrapper')
+
+    if (scrollPosition < 159) {
+      scrollBackToTop.style.visibility = 'hidden'
+    } else {
+      scrollBackToTop.style.visibility = 'visible'
     }
-    
-    if (!isBrowser) getScrollPosition()
 
-    return (
-        <div className={ styles.wrapper } id="wrapper">
-            <a className={styles.scroll}>
-                <FiChevronUp/>
-            </a>
-        </div>
-    )
+  }, [scrollPosition])
+  return (
+    <div className={styles.wrapper} id='wrapper'>
+      <a className={styles.scroll} href="/#">
+        <FiChevronUp />
+      </a>
+    </div>
+  )
 }
 
 export default ScrollBackToTop;

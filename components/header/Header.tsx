@@ -3,7 +3,7 @@ import { FiSearch, FiUser, FiHeart, FiShoppingCart } from 'react-icons/fi'
 
 import styles from './header.module.css'
 
-export default function Layout() {
+const Header = () => {
   return (
     <header className={styles.wrapper}>
       <div className={styles.container}>
@@ -30,6 +30,7 @@ export default function Layout() {
         </section>
       </div>
     </header>
-    
-    )
-  }
+  )
+}
+
+export default Header

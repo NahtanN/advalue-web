@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import React from 'react';
 import { GetStaticProps } from 'next'
-import { useState } from 'react'
 
 import Header from '../components/header/Header'
 import Aside from '../components/aside/Aside'
@@ -26,7 +25,7 @@ interface ComponentProps {
 export const getStaticProps: GetStaticProps = async () => {
   const API = await fetch(process.env.API_URL)
   const products: Products = await API.json()
-  
+
   return {
     props: {
       products
@@ -35,28 +34,26 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-const Home: React.FC<ComponentProps> = ({ products }) => {
-  const [ page, setPage ] = useState()
-
+const Home = ({ products }: ComponentProps) => {
   return (
-      <div>
-        <Head>
-            <title>Vital - Home</title>
-        </Head>
+    <div>
+      <Head>
+        <title>Vital - Home</title>
+      </Head>
 
-        <Header />
+      <Header/>
 
-        <ScrollBackToTop/>
-        
-        <div className={styles.main}>
-          
-          <Aside style={styles.aside}/>
-          <Filter style={styles.filter}/>
-          <Products style={styles.products} products={products.data}/>
+      <ScrollBackToTop/>
 
-        </div>
-       
+      <div className={styles.main}>
+
+        <Aside style={styles.aside} />
+        <Filter style={styles.filter} />
+        <Products style={styles.products} products={products.data} />
+
       </div>
+
+    </div>
   )
 }
 
