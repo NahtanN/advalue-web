@@ -1,11 +1,12 @@
 .main {
     display: grid;
     grid-template-columns: 0.2fr 0.6fr 2fr 0.3fr;
-    grid-template-rows: 1fr 0.1fr min-content;
+    grid-template-rows: 1fr 0.1fr min-content 2fr;
     
     grid-template-areas: '. . . .'
     '. aside filter .'
-    '. aside products .';
+    '. aside products .'
+    '. . loadProducts .';
 }
 
 .aside {
@@ -23,4 +24,12 @@
 
 .products {
     grid-area: products;
+}
+
+.loadProducts {
+    grid-area: loadProducts;
+
+    justify-self: center;
+    align-self: center;
+
 }

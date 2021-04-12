@@ -28,40 +28,55 @@ export interface ProductInterface {
 interface ComponentProps {
   style: string;
   products: Array<ProductInterface>;
+  clientFetching?: Array<ProductInterface>;
 }
 
-const Products: React.FC<ComponentProps> = ({ style, products }) => {
+const Products: React.FC<ComponentProps> = ({ style, products, clientFetching }) => {
+
+  const loadProduct = (product: ProductInterface) => {
+    return (
+      <section className={styles.container} key={product.id}>
+        <div className={styles.product}>
+          <div className={styles.image_container}>
+            <Image
+              id="te"
+              priority
+              src={product.images[0].url}
+              layout="fill"
+              objectFit="fill"
+              quality={100}
+              alt="bitcoin"
+              className={styles.image}
+            />
+          </div>
+
+          <h1 className={styles.title}>{product.title}</h1>
+          <span className={styles.category}>{product.category.name}</span>
+          <p className={styles.price}>$ {product.value}</p>
+
+          <div className={styles.interactions}>
+            <FiHeart id={styles.heart} />
+            <FiShoppingCart id={styles.cart} />
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   return (
-    <div className={ style }>
-        {products.map((product: ProductInterface) => {
-          return (
-            <section className={styles.container} key={product.id}>
-              <div className={styles.product}>
-                <div className={styles.image_container}>
-                    <Image
-                      id="te" 
-                      priority
-                      src={ product.images[0].url }
-                      layout="fill"
-                      objectFit="fill"
-                      quality={100}
-                      alt="bitcoin"
-                      className={styles.image}
-                    />
-                </div>
-
-                <h1 className={styles.title}>{product.title}</h1>
-                <span className={styles.category}>{product.category.name}</span>
-                <p className={styles.price}>$ {product.value}</p>
-
-                <div className={styles.interactions}>
-                  <FiHeart id={styles.heart}/>
-                  <FiShoppingCart id={styles.cart}/>
-                </div>
-              </div>
-            </section>
+    <div className={style}>
+      {products.map((product: ProductInterface) => {
+        return loadProduct(product)
+      })}
+      {
+        clientFetching
+          ? (
+            clientFetching.map(product => {
+              return loadProduct(product)
+            })
           )
-        })}
+          : ''
+      }
     </div>
   )
 }
