@@ -8,7 +8,6 @@ import Filter from '../components/filter/Filter'
 import Products, { ProductInterface } from '../components/products/Products'
 import ScrollBackToTop from '../components/scroll/ScrollBackToTop'
 import FetchProducts from '../components/fetchProducts/fetchProducts'
-import InfiniteScroll from '../components/fetchProducts/infiniteScroll'
 
 import styles from '../styles/pages/index.module.css'
 
@@ -60,7 +59,7 @@ const Home = ({ products }: ComponentProps) => {
         <Filter style={styles.filter} />
         <Products style={styles.products} products={products.data} clientFetching={data}/>
         <FetchProducts style={styles.loadProducts} reqData={handleData}/>
-        {/* <InfiniteScroll style={styles.loadProducts} reqData={handleData}/> */}
+        
       </div>
 
     </div>
