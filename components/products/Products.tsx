@@ -33,7 +33,7 @@ interface ComponentProps {
 
 const Products: React.FC<ComponentProps> = ({ style, products, clientFetching }) => {
 
-  const loadProduct = (product: ProductInterface) => {
+  const productSchema = (product: ProductInterface) => {
     return (
       <section className={styles.container} key={product.id}>
         <div className={styles.product}>
@@ -66,13 +66,13 @@ const Products: React.FC<ComponentProps> = ({ style, products, clientFetching })
   return (
     <div className={style}>
       {products.map((product: ProductInterface) => {
-        return loadProduct(product)
+        return productSchema(product)
       })}
       {
         clientFetching
           ? (
             clientFetching.map(product => {
-              return loadProduct(product)
+              return productSchema(product)
             })
           )
           : ''

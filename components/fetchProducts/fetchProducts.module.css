@@ -1,0 +1,33 @@
+.fetchProducts {
+    width: 31.7rem;
+    height: 3.4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 0.5rem;
+
+    color: white;
+
+    outline: none;
+}
+
+#infiniteScroll, #loadProducts {
+    background-color: #1875f0;
+}
+
+#loadProducts {
+    transition: 0.2s all;
+}
+
+#loadProductsDisable {
+    background-color: gray;
+
+    transition: 0.2s all;
+}
+
+#loadProducts:hover {
+    transform: scale(1.05);
+}

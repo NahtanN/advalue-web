@@ -16,7 +16,8 @@
     cursor: pointer;
     transition: 0.4s all;
 
-    box-shadow: 1rem 1rem 2rem gray;
+    box-shadow: -7px -7px 17px rgba(255, 255, 255, 0.6),
+        7px 7px 17px rgba(70, 70, 70, 0.12);
 
     display: grid;
     grid-template-columns: 0.7fr 1fr 0.2fr;
