@@ -31,3 +31,8 @@
 .categories li:hover, #arrow:hover {
     transform: scale(1.1);
 }
+
+.selected_products {
+    transform: scale(1.1);
+    font-weight: bold;
+}
