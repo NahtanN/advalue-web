@@ -1,17 +1,9 @@
-import Head from 'next/head'
-import React, { useState } from 'react';
-import { GetStaticProps } from 'next'
+import { GetStaticProps } from 'next';
+import React from 'react';
+import PageLayout from '../components/pageLayout/PageLayout';
+import { ProductInterface } from '../components/products/Products';
 
-import Header from '../components/header/Header'
-import Aside from '../components/aside/Aside'
-import Filter from '../components/filter/Filter'
-import Products, { ProductInterface } from '../components/products/Products'
-import ScrollBackToTop from '../components/scroll/ScrollBackToTop'
-import InfiniteScrollComponent from '../components/fetchProducts/infiniteScroll'
-
-import styles from '../styles/pages/index.module.css'
-
-interface Products {
+interface ProductsAPI {
   current_page: number;
   prev_page: number;
   next_page: number;
@@ -20,12 +12,12 @@ interface Products {
 }
 
 interface ComponentProps {
-  products: Products;
+  products: ProductsAPI;
 }
 
 export const getStaticProps: GetStaticProps = async () => {
   const API = await fetch(process.env.API_URL)
-  const products: Products = await API.json()
+  const products: ProductsAPI = await API.json()
 
   return {
     props: {
@@ -36,33 +28,9 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Home = ({ products }: ComponentProps) => {
-  const [ data, setData ] = useState<ProductInterface[]>()
-  
-  const handleData = (newData: ProductInterface[]) => {
-    if (data === undefined) return setData(newData)
-    
-    setData(prev => [...data, ...newData])
-  }
 
   return (
-    <div>
-      <Head>
-        <title>Vital - Home</title>
-      </Head>
-
-      <Header/>
-      <ScrollBackToTop/>
-
-      <div className={styles.main}>
-
-        <Aside style={styles.aside} />
-        <Filter style={styles.filter} />
-        <Products style={styles.products} products={products.data} clientFetching={data}/>        
-        <InfiniteScrollComponent style={styles.loadProducts} reqData={handleData}/>
-        
-      </div>
-
-    </div>
+    <PageLayout head={'Vital - Home'} products={products.data} />
   )
 }
 

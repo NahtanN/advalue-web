@@ -27,7 +27,7 @@ export interface ProductInterface {
 
 interface ComponentProps {
   style: string;
-  products: Array<ProductInterface>;
+  products?: Array<ProductInterface>;
   clientFetching?: Array<ProductInterface>;
 }
 
@@ -65,7 +65,7 @@ const Products: React.FC<ComponentProps> = ({ style, products, clientFetching })
 
   return (
     <div className={style}>
-      {products.map((product: ProductInterface) => {
+      {products?.map((product: ProductInterface) => {
         return productSchema(product)
       })}
       {
