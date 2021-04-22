@@ -17,20 +17,24 @@
     padding-bottom: 1.1rem;
 
     text-decoration: none;
-    color: black;
 }
 
 .filter a + a {
     margin-left: 3rem;    
 }
 
-.filter a:first-child {
+.filter_enable {
     color:  #1875f0;
     font-weight: bold;
-    border-bottom: 2px solid blue;
+    border-bottom: 2px solid blue;  
 }
 
-.filter a:hover {
+.filter_disable {
+    color: black;
+}
+
+.filter_disable:hover {
+
     color:  #1875f0;
     transform: scale(1.1);
 }

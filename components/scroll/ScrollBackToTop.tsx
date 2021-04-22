@@ -28,9 +28,14 @@ const ScrollBackToTop = () => {
     }
 
   }, [scrollPosition])
+  
+  const handleclick = () => {
+    window.scrollTo(0, 0)
+  }
+
   return (
     <div className={styles.wrapper} id='wrapper'>
-      <a className={styles.scroll} href="/#">
+      <a className={styles.scroll} onClick={handleclick}>
         <FiChevronUp />
       </a>
     </div>

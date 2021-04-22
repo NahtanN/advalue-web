@@ -1,13 +1,21 @@
+import { useRouter } from 'next/dist/client/router'
 import { FaCrown } from 'react-icons/fa'
 import { FiSearch, FiUser, FiHeart, FiShoppingCart } from 'react-icons/fi'
 
 import styles from './header.module.css'
 
 const Header = () => {
+  const router = useRouter()
+  
+  const handleLogoClick = () => {
+    sessionStorage.setItem('filter', 'All products')
+    router.push('/')
+  }
+
   return (
     <header className={styles.wrapper}>
       <div className={styles.container}>
-        <section className={styles.logo}>
+        <section className={styles.logo} onClick={handleLogoClick}>
           <FaCrown size={40}/>
           <h1>Vital</h1>
         </section>

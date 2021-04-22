@@ -1,3 +1,4 @@
+import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
 import { FiChevronRight } from 'react-icons/fi'
@@ -5,21 +6,31 @@ import { FiChevronRight } from 'react-icons/fi'
 import styles from './aside.module.css';
 
 export default function Aside({ style }) {
-  
+  const router = useRouter()
+
+  const [ getFilter, setFilter ] = useState<string>()
+
+  useEffect(() => {
+    setFilter(sessionStorage.getItem('filter'))
+  })
+
   useEffect(() => {
     const filterCategorie = sessionStorage.getItem('product')
 
-    if (!filterCategorie || document.URL === 'http://localhost:3000/') return
+    if (!filterCategorie || router.pathname === '/' ) return
 
-    const selectedTag = document.getElementById(filterCategorie)
+    if (filterCategorie != 'index') {
+      const selectedTag = document.getElementById(filterCategorie)
+  
+      selectedTag.setAttribute('class', styles.selected_products)
+    }
 
-    selectedTag.setAttribute('class', styles.selected_products)
   })
 
   const handleSelectProduct = (selectedProduct: string) => {
     const filterCategorie = sessionStorage.getItem('product')
 
-    if (filterCategorie) {
+    if (filterCategorie && filterCategorie != 'index') {
       const selectedTag = document.getElementById(filterCategorie)
       selectedTag.removeAttribute('class')
     }
@@ -33,7 +44,10 @@ export default function Aside({ style }) {
         <li id='Computers'>
           <Link href={{
             pathname: '/products/filter',
-            query: { ctg: 'Computer' }
+            query: { 
+              ctg: 'Computer',
+              fil: getFilter
+             }
           }}>
             <a onClick={() => handleSelectProduct('Computers')}>
               <p>Computers</p>
@@ -45,7 +59,10 @@ export default function Aside({ style }) {
         <li id='Acessories'>
           <Link href={{
             pathname: '/products/filter',
-            query: { ctg: 'Acessories' }
+            query: { 
+              ctg: 'Acessories',
+              fil: getFilter
+            }
           }}>
             <a onClick={() => handleSelectProduct('Acessories')}>
               <p>Acessories</p>
@@ -57,7 +74,10 @@ export default function Aside({ style }) {
         <li id='Cell Phone'>
           <Link href={{
             pathname: '/products/filter',
-            query: { ctg: 'Cell Phone' }
+            query: { 
+              ctg: 'Cell Phone',
+              fil: getFilter
+            }
           }}>
             <a onClick={() => handleSelectProduct('Cell Phone')} id='Cell Phone'>
               <p>Cell Phone</p>
@@ -69,7 +89,10 @@ export default function Aside({ style }) {
         <li id='Books'>
           <Link href={{
             pathname: '/products/filter',
-            query: { ctg: 'Books' }
+            query: { 
+              ctg: 'Books',
+              fil: getFilter
+            }
           }}>
             <a onClick={() => handleSelectProduct('Books')} id='Books'>
               <p>Books</p>
@@ -81,7 +104,10 @@ export default function Aside({ style }) {
         <li id='Sports'>
           <Link href={{
             pathname: '/products/filter',
-            query: { ctg: 'Sports' }
+            query: { 
+              ctg: 'Sports',
+              fil: getFilter
+            }
           }}>
             <a onClick={() => handleSelectProduct('Sports')} id='Sports'>
               <p>Sports</p>
@@ -93,7 +119,10 @@ export default function Aside({ style }) {
         <li id='Clothing'>
           <Link href={{
             pathname: '/products/filter',
-            query: { ctg: 'Clothing' }
+            query: { 
+              ctg: 'Clothing',
+              fil: getFilter
+            }
           }}>
             <a onClick={() => handleSelectProduct('Clothing')} id='Clothing'>
               <p>Clothing</p>

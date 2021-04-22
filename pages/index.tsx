@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
-import React from 'react';
+import { useRouter } from 'next/dist/client/router';
+import React, { useEffect } from 'react';
 import PageLayout from '../components/pageLayout/PageLayout';
 import { ProductInterface } from '../components/products/Products';
 
@@ -28,6 +29,10 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Home = ({ products }: ComponentProps) => {
+
+  useEffect(() => {
+    sessionStorage.setItem('product', 'index')
+  }, [])
 
   return (
     <PageLayout head={'Vital - Home'} products={products.data} />
