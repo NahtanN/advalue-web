@@ -17,7 +17,7 @@ export default function Aside({ style }) {
   useEffect(() => {
     const filterCategorie = sessionStorage.getItem('product')
 
-    if (!filterCategorie || router.pathname === '/' ) return
+    if (!filterCategorie || router.pathname === '/homepage' ) return
 
     if (filterCategorie != 'index') {
       const selectedTag = document.getElementById(filterCategorie)
@@ -43,7 +43,7 @@ export default function Aside({ style }) {
       <ul className={styles.categories}>
         <li id='Computers'>
           <Link href={{
-            pathname: '/products/filter',
+            pathname: '/homepage/products/filter',
             query: { 
               ctg: 'Computer',
               fil: getFilter
@@ -58,7 +58,7 @@ export default function Aside({ style }) {
 
         <li id='Acessories'>
           <Link href={{
-            pathname: '/products/filter',
+            pathname: '/homepage/products/filter',
             query: { 
               ctg: 'Acessories',
               fil: getFilter
@@ -73,7 +73,7 @@ export default function Aside({ style }) {
 
         <li id='Cell Phone'>
           <Link href={{
-            pathname: '/products/filter',
+            pathname: '/homepage/products/filter',
             query: { 
               ctg: 'Cell Phone',
               fil: getFilter
@@ -88,7 +88,7 @@ export default function Aside({ style }) {
 
         <li id='Books'>
           <Link href={{
-            pathname: '/products/filter',
+            pathname: '/homepage/products/filter',
             query: { 
               ctg: 'Books',
               fil: getFilter
@@ -103,7 +103,7 @@ export default function Aside({ style }) {
 
         <li id='Sports'>
           <Link href={{
-            pathname: '/products/filter',
+            pathname: '/homepage/products/filter',
             query: { 
               ctg: 'Sports',
               fil: getFilter
@@ -118,7 +118,7 @@ export default function Aside({ style }) {
 
         <li id='Clothing'>
           <Link href={{
-            pathname: '/products/filter',
+            pathname: '/homepage/products/filter',
             query: { 
               ctg: 'Clothing',
               fil: getFilter

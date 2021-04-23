@@ -9,7 +9,7 @@ const Header = () => {
   
   const handleLogoClick = () => {
     sessionStorage.setItem('filter', 'All products')
-    router.push('/')
+    router.push('/homepage')
   }
 
   return (

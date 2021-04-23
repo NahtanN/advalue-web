@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Header from '../header/Header'
 import Aside from '../aside/Aside'
 import Filter from '../filter/Filter'
+import ProductsLoading from '../productsLoading/ProductsLoading'
 import Products, { ProductInterface } from '../products/Products'
 import ScrollBackToTop from '../scroll/ScrollBackToTop'
 import InfiniteScrollComponent from '../fetchProducts/InfiniteScroll'
@@ -12,10 +13,11 @@ import styles from './pageLayout.module.css'
 
 interface ComponentProps {
   head: string;
-  products: any
+  products?: any;
+  isLoading?: boolean;
 }
 
-const PageLayout: React.FC<ComponentProps> = ({ head, products }) => {
+const PageLayout: React.FC<ComponentProps> = ({ head, products, isLoading=false }) => {
   const [ data, setData ] = useState<ProductInterface[]>()
   
   const handleData = (newData: ProductInterface[]) => {
@@ -37,7 +39,13 @@ const PageLayout: React.FC<ComponentProps> = ({ head, products }) => {
 
         <Aside style={styles.aside} />
         <Filter style={styles.filter} />
-        <Products style={styles.products}  products={products} clientFetching={data} />
+
+        {
+          isLoading
+            ? <ProductsLoading style={styles.products} />
+            : <Products style={styles.products}  products={products} clientFetching={data} />
+        }        
+
         <InfiniteScrollComponent style={styles.loadProducts} reqData={handleData} />
 
       </div>

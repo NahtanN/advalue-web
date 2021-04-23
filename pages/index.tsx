@@ -30,12 +30,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Home = ({ products }: ComponentProps) => {
 
-  useEffect(() => {
-    sessionStorage.setItem('product', 'index')
-  }, [])
-
   return (
-    <PageLayout head={'Vital - Home'} products={products.data} />
+    <PageLayout head={'Vital - Home'} products={products.data}/>
   )
 }
 

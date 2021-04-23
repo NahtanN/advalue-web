@@ -35,7 +35,7 @@ export default function filter({ style }) {
     <div className={style}>
       <section className={styles.filter}>
         <Link href={{
-            pathname: '/products/filter',
+            pathname: '/homepage/products/filter',
             query: { 
               ctg: getProduct,
               fil: 'All products'
@@ -51,7 +51,7 @@ export default function filter({ style }) {
         </Link>
 
         <Link href={{
-            pathname: '/products/filter',
+            pathname: '/homepage/products/filter',
             query: { 
               ctg: getProduct,
               fil: 'Low price'
@@ -67,7 +67,7 @@ export default function filter({ style }) {
         </Link>
 
         <Link href={{
-            pathname: '/products/filter',
+            pathname: '/homepage/products/filter',
             query: { 
               ctg: getProduct,
               fil: 'High price'

@@ -39,14 +39,13 @@ const Products: React.FC<ComponentProps> = ({ style, products, clientFetching })
         <div className={styles.product}>
           <div className={styles.image_container}>
             <Image
-              id="te"
+              className={styles.image}
               priority
               src={product.images[0].url}
               layout="fill"
               objectFit="fill"
               quality={100}
               alt="bitcoin"
-              className={styles.image}
             />
           </div>
 
