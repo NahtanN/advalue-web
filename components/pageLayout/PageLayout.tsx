@@ -4,10 +4,11 @@ import Head from 'next/head'
 import Header from '../header/Header'
 import Aside from '../aside/Aside'
 import Filter from '../filter/Filter'
-import ProductsLoading from '../productsLoading/ProductsLoading'
+import ProductsSkeleton from '../productsSkeleton/ProductsSkeleton'
 import Products, { ProductInterface } from '../products/Products'
 import ScrollBackToTop from '../scroll/ScrollBackToTop'
 import InfiniteScrollComponent from '../fetchProducts/InfiniteScroll'
+import Footer from '../footer/Footer'
 
 import styles from './pageLayout.module.css'
 
@@ -42,13 +43,15 @@ const PageLayout: React.FC<ComponentProps> = ({ head, products, isLoading=false 
 
         {
           isLoading
-            ? <ProductsLoading style={styles.products} />
+            ? <ProductsSkeleton style={styles.products} />
             : <Products style={styles.products}  products={products} clientFetching={data} />
         }        
 
         <InfiniteScrollComponent style={styles.loadProducts} reqData={handleData} />
 
       </div>
+
+      <Footer />
 
     </div>
   )

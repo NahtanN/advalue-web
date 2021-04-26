@@ -42,7 +42,6 @@
 .image_container {
     width: 30rem;
     grid-area: img;
-    /* background-color: lightgray; */
     border-radius: 2rem;
 }
 
@@ -57,22 +56,16 @@
     width: 40rem;
     
     height: 3rem;
-    
-    /* background-color: lightgray;     */
 }
 
 .category {
     width: 25rem;
     height: 2.5rem;
-
-    /* background-color: lightgray; */
 }
 
 .price {
     width: 15rem;
     height: 3rem;
-
-    /* background-color: lightgray; */
 }
 
 @keyframes pulse {
@@ -82,14 +75,4 @@
     100% {
         background-position: -135% 0%;
     }
-    
-    /* 0% {
-        background-color: rgba(165, 165, 165, .1)
-    }
-    50% {
-        background-color: rgba(165, 165, 165, .3)
-    }
-    100% {
-        background-color: rgba(165, 165, 165, .1)
-    } */
 }

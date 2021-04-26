@@ -7,11 +7,13 @@ import styles from './scrollBackToTop.module.css'
 
 const ScrollBackToTop = () => {
   const [scrollPosition, setScrollPosition] = useState(0)
+  const [scrolledStatus, setScrolledStatus] = useState(0)
 
   const listenToScroll = () => {
-    const { winScroll } = getScrollPosition()
+    const { winScroll, scrolled } = getScrollPosition()
 
     setScrollPosition(winScroll)
+    setScrolledStatus(scrolled)
   }
 
   useEffect(() => {
@@ -21,12 +23,9 @@ const ScrollBackToTop = () => {
   useEffect(() => {
     var scrollBackToTop = document.getElementById('wrapper')
 
-    if (scrollPosition < 159) {
-      scrollBackToTop.style.visibility = 'hidden'
-    } else {
-      scrollBackToTop.style.visibility = 'visible'
-    }
-
+    scrollPosition < 159 || scrolledStatus > 0.97
+      ? scrollBackToTop.style.visibility = 'hidden'
+      : scrollBackToTop.style.visibility = 'visible'    
   }, [scrollPosition])
   
   const handleclick = () => {

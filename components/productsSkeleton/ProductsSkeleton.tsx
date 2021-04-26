@@ -1,6 +1,6 @@
-import styles from './productsLoading.module.css'
+import styles from './productsSkeleton.module.css'
 
-const ProductsLoading = ({ style }) => {
+const ProductsSkeleton = ({ style }) => {
   return (
     <div className={style}>
       <section className={styles.container}>
@@ -42,4 +42,4 @@ const ProductsLoading = ({ style }) => {
   )
 }
 
-export default ProductsLoading
+export default ProductsSkeleton
