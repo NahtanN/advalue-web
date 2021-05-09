@@ -21,6 +21,7 @@ interface ComponentProps {
 const PageLayout: React.FC<ComponentProps> = ({ head, products, isLoading=false }) => {
   const [ data, setData ] = useState<ProductInterface[]>()
   
+  // Handles the data received from the infinete scroll and passes it to the 'Products' component
   const handleData = (newData: ProductInterface[]) => {
     if (data === undefined) return setData(newData)
     

@@ -6,10 +6,12 @@ import styles from './filter.module.css'
 export default function filter({ style }) {
   const [ getProduct, setProduct ] = useState<string>()
 
+  // Triggered after every rendering
   useEffect(() => {
     setProduct(sessionStorage.getItem('product'))
   })
 
+  // Triggered after every rendering
   useEffect(() => {
     const filter = sessionStorage.getItem('filter')
 
@@ -22,6 +24,7 @@ export default function filter({ style }) {
     selectTag.setAttribute('class', styles.filter_enable)
   })
 
+  // Changes the 'filter' item
   const handleSelectFilter = (setFilter: string) => {
     const selectedFilter = sessionStorage.getItem('filter')
     

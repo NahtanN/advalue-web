@@ -5,23 +5,15 @@ import { FiHeart, FiShoppingCart } from "react-icons/fi"
 import styles from './products.module.css'
 
 export interface ProductInterface {
-  id: string;
+  _id: string;
   title: string;
   value: number;
-  created_at: string;
-  category_id: number;
-  category: {
-    id: number;
-    name: string;
-  };
+  category: string;  
   images: Array<{
-    id: number;
     name: string;
     size: number;
     key: string;
     url: string;
-    created_at: string;
-    product_id: string;
   }>;
 }
 
@@ -31,11 +23,20 @@ interface ComponentProps {
   clientFetching?: Array<ProductInterface>;
 }
 
+/**
+ * Returns the products
+ * 
+ * @param style - className for styling
+ * @param products - receive the products from the static generation
+ * @param clientFetching - receive the products from the client fetching
+ * @returns the products components
+ */
 const Products: React.FC<ComponentProps> = ({ style, products, clientFetching }) => {
 
+  // Default schema for the products
   const productSchema = (product: ProductInterface) => {
     return (
-      <section className={styles.container} key={product.id}>
+      <section className={styles.container} key={product._id}>
         <div className={styles.product}>
           <div className={styles.image_container}>
             <Image
@@ -50,7 +51,7 @@ const Products: React.FC<ComponentProps> = ({ style, products, clientFetching })
           </div>
 
           <h1 className={styles.title}>{product.title}</h1>
-          <span className={styles.category}>{product.category.name}</span>
+          <span className={styles.category}>{product.category}</span>
           <p className={styles.price}>$ {product.value}</p>
 
           <div className={styles.interactions}>

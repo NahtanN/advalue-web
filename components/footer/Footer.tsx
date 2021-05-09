@@ -3,12 +3,14 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaCcVisa, FaCcMastercar
 import styles from './footer.module.css'
 
 const Footer = () => {
+
   const handleClickBackToTop = () => {
     window.scrollTo(0, 0)
   }
 
   return (
     <div className={styles.container}>
+      
       <button 
         id={styles.back_to_top}
         onClick={handleClickBackToTop}
