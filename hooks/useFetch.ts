@@ -1,15 +1,5 @@
 import useSWR from 'swr'
-
-import Products, { ProductInterface } from '../components/products/Products'
-
-
-interface Products {
-  current_page: number;
-  prev_page: number;
-  next_page: number;
-  quantity: number;
-  data: Array<ProductInterface>;
-}
+import API from '../service/API'
 
 /**
  * Returns the fetching data
@@ -21,10 +11,10 @@ function useFetch<Data = any, Error = any>(url: string) {
   
   // Fetch data using SWR
   const { data, error } = useSWR<Data, Error>(url, async () => {
-    var API = await fetch(url)
-    var data = await API.json()
-
-    return data
+    var response = await API.get(url)
+    var result = await response.data
+    
+    return result
   }, {
     errorRetryCount: 5
   })
