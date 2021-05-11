@@ -33,14 +33,17 @@ const ScrollBackToTop = () => {
     var scrollBackToTop = document.getElementById('wrapper')
 
     // Sets the visibility of the 'div' component
-    scrollPosition < 159 || scrolledStatus > 0.97
+    scrollPosition < 159 || scrolledStatus > 0.93
       ? scrollBackToTop.style.visibility = 'hidden'
       : scrollBackToTop.style.visibility = 'visible'    
   }, [scrollPosition])
   
   // When the 'div' is clicked, scroll back to top
   const handleclick = () => {
-    window.scrollTo(0, 0)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
   }
 
   return (
