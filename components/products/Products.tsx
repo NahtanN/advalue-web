@@ -1,8 +1,10 @@
+import { useRouter } from "next/dist/client/router"
 import Image from "next/image"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { FiHeart, FiShoppingCart } from "react-icons/fi"
-
+import InfiniteScrollComponent from "../fetchProducts/InfiniteScroll"
 import styles from './products.module.css'
+
 
 export interface ProductInterface {
   _id: string;
@@ -32,6 +34,20 @@ interface ComponentProps {
  * @returns the products components
  */
 const Products: React.FC<ComponentProps> = ({ style, products, clientFetching }) => {
+  const [ data, setData ] = useState<ProductInterface[]>()
+
+  const router = useRouter()
+  
+  useEffect(() => {
+    setData([])
+  }, [router.asPath])
+
+  // Handles the data received from the infinete scroll and passes it to the 'Products' component
+  const handleData = (newData: ProductInterface[]) => {
+    if (data === undefined) return setData(newData)
+    
+    setData(prev => [...data, ...newData])
+  }
 
   // Default schema for the products
   const productSchema = (product: ProductInterface) => {
@@ -69,15 +85,20 @@ const Products: React.FC<ComponentProps> = ({ style, products, clientFetching })
         return productSchema(product)
       })}
       {
-        clientFetching
+        data
           ? (
-            clientFetching.map(product => {
+            data.map(product => {
               return productSchema(product)
             })
           )
           : ''
       }
+
+      <InfiniteScrollComponent style={styles.loadProducts} reqData={handleData} />
+
     </div>
+
+    
   )
 }
 

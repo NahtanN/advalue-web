@@ -22,4 +22,6 @@ function useFetch<Data = any, Error = any>(url: string) {
   return { data, error }
 }
 
+export const fetcher = (url: string) => API.get(url).then(result => result.data)
+
 export default useFetch

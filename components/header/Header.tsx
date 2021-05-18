@@ -8,7 +8,9 @@ const Header = () => {
   const router = useRouter()
   
   const handleLogoClick = () => {
-    sessionStorage.setItem('filter', 'All products')
+    sessionStorage.setItem('filter', 'All-products')
+    sessionStorage.setItem('product', 'index')
+
     router.push('/homepage')
   }
 
