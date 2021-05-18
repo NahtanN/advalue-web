@@ -7,20 +7,26 @@ import AsideSkeleton from '../skeletons/asideSkeleton/AsideSkeleton'
 
 import styles from './aside.module.css';
 
+interface ISessionStorage {
+  product: string;
+  filter: string;
+  path: string;
+}
+
 interface CategoryInterface {
   name: string
 }
 
 export default function Aside({ style }) {
+  
+  // Handles the select product
+  const [ getFilter, setFilter ] = useState<string>()
+  
   const router = useRouter()
 
   // Fetch external data
   const categories = useFetch('/categories').data
 
-  // Handles the select product
-  const [ getFilter, setFilter ] = useState<string>()
-
-  // Triggered after every rendering
   useEffect(() => {
     setFilter(sessionStorage.getItem('filter'))
   })
@@ -38,16 +44,11 @@ export default function Aside({ style }) {
     if (filterCategorie != 'index') {
       const selectedTag = document.getElementById(filterCategorie)
   
-      try {
-
         selectedTag.setAttribute('class', styles.selected_products)
-
-      } catch(err) {
 
       }
     }
-
-  })
+  )
 
   // Update the 'product' variable in the session storage
   const handleSelectProduct = (selectedProduct: string) => {
@@ -74,15 +75,15 @@ export default function Aside({ style }) {
         {
           categories.map((category: CategoryInterface) => {
             const placeHolder = category.name
-            
+
             return (
-              <li 
+              <li
                 id={placeHolder}
                 key={placeHolder}
               >
                 <Link href={{
                   pathname: '/homepage/products/filter',
-                  query: { 
+                  query: {
                     ctg: placeHolder,
                     fil: getFilter
                   }

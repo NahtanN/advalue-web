@@ -16,7 +16,7 @@ export default function filter({ style }) {
     const filter = sessionStorage.getItem('filter')
 
     if (!filter) {
-      return sessionStorage.setItem('filter', 'All products')
+      return sessionStorage.setItem('filter', 'All-products')
     }
 
     const selectTag = document.getElementById(filter)
@@ -41,12 +41,13 @@ export default function filter({ style }) {
             pathname: '/homepage/products/filter',
             query: { 
               ctg: getProduct,
-              fil: 'All products'
-             }
+              fil: 'All-products'
+             },
+             
           }}>
           <a 
-            id='All products' 
-            onClick={() => handleSelectFilter('All products')}
+            id='All-products' 
+            onClick={() => handleSelectFilter('All-products')}
             className={styles.filter_disable}
           >
             <small>All products</small>
@@ -57,12 +58,12 @@ export default function filter({ style }) {
             pathname: '/homepage/products/filter',
             query: { 
               ctg: getProduct,
-              fil: 'Low price'
+              fil: 'Low-price'
              }
           }}>
           <a 
-            id='Low price'
-            onClick={() => handleSelectFilter('Low price')}
+            id='Low-price'
+            onClick={() => handleSelectFilter('Low-price')}
             className={styles.filter_disable}
           >
             <small>Low price</small>
@@ -73,12 +74,12 @@ export default function filter({ style }) {
             pathname: '/homepage/products/filter',
             query: { 
               ctg: getProduct,
-              fil: 'High price'
+              fil: 'High-price'
              }
           }}>
           <a 
-            id='High price'
-            onClick={() => handleSelectFilter('High price')}
+            id='High-price'
+            onClick={() => handleSelectFilter('High-price')}
             className={styles.filter_disable}
           >
             <small>High price</small>
