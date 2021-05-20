@@ -2,9 +2,21 @@ import { useRouter } from "next/dist/client/router"
 import Image from "next/image"
 import React, { useEffect, useState } from "react"
 import { FiHeart, FiShoppingCart } from "react-icons/fi"
+import useSWR from "swr"
+import { fetcher } from "../../hooks/useFetch"
+import getFilterUrl from "../../utils/getFilterUrl"
 import InfiniteScrollComponent from "../fetchProducts/InfiniteScroll"
+import ProductsSkeleton from '../skeletons/productsSkeleton/ProductsSkeleton'
 import styles from './products.module.css'
 
+interface RequestProducts {
+  current_page: number;
+  prev_page: number;
+  next_page: number;
+  quantity: number;
+  data: Array<ProductInterface>;
+  Error?: String
+}
 
 export interface ProductInterface {
   _id: string;
@@ -21,8 +33,36 @@ export interface ProductInterface {
 
 interface ComponentProps {
   style: string;
-  products?: Array<ProductInterface>;
-  clientFetching?: Array<ProductInterface>;
+}
+
+// Default schema for the products
+const productSchema = (product: ProductInterface) => {
+  return (
+    <section className={styles.container} key={product._id}>
+      <div className={styles.product}>
+        <div className={styles.image_container}>
+          <Image
+            className={styles.image}
+            priority
+            src={product.images[0].url}
+            layout="fill"
+            objectFit="fill"
+            quality={100}
+            alt="bitcoin"
+          />
+        </div>
+
+        <h1 className={styles.title}>{product.title}</h1>
+        <span className={styles.category}>{product.category}</span>
+        <p className={styles.price}>$ {product.value}</p>
+
+        <div className={styles.interactions}>
+          <FiHeart id={styles.heart} />
+          <FiShoppingCart id={styles.cart} />
+        </div>
+      </div>
+    </section>
+  )
 }
 
 /**
@@ -33,72 +73,69 @@ interface ComponentProps {
  * @param clientFetching - receive the products from the client fetching
  * @returns the products components
  */
-const Products: React.FC<ComponentProps> = ({ style, products, clientFetching }) => {
-  const [ data, setData ] = useState<ProductInterface[]>()
+const Products: React.FC<ComponentProps> = ({ style }) => {
+  
+  const { pathname, asPath } = useRouter()
+  const [page, setPage] = useState(1)
+  const [products, setProducts] = useState<ProductInterface[]>()
 
-  const router = useRouter()
+  const { data: reqAPI, error } = useSWR<RequestProducts>(getFilterUrl(page), fetcher)
   
   useEffect(() => {
-    setData([])
-  }, [router.asPath])
-
-  // Handles the data received from the infinete scroll and passes it to the 'Products' component
-  const handleData = (newData: ProductInterface[]) => {
-    if (data === undefined) return setData(newData)
     
-    setData(prev => [...data, ...newData])
-  }
+    if (pathname != '/') {
 
-  // Default schema for the products
-  const productSchema = (product: ProductInterface) => {
-    return (
-      <section className={styles.container} key={product._id}>
-        <div className={styles.product}>
-          <div className={styles.image_container}>
-            <Image
-              className={styles.image}
-              priority
-              src={product.images[0].url}
-              layout="fill"
-              objectFit="fill"
-              quality={100}
-              alt="bitcoin"
-            />
-          </div>
+      setProducts(undefined)
+      setPage(1)
 
-          <h1 className={styles.title}>{product.title}</h1>
-          <span className={styles.category}>{product.category}</span>
-          <p className={styles.price}>$ {product.value}</p>
+    }
+    
+  }, [asPath])
 
-          <div className={styles.interactions}>
-            <FiHeart id={styles.heart} />
-            <FiShoppingCart id={styles.cart} />
-          </div>
-        </div>
-      </section>
-    )
+  useEffect(() => {
+
+    if(reqAPI && !reqAPI.Error && products == undefined) {
+
+      setProducts(reqAPI.data)
+      setPage(page + 1)
+      
+    }
+
+  }, [reqAPI])  
+
+  const handleShowProducts = (newProducts: ProductInterface[]) => {    
+
+    setProducts(prev => [...products, ...newProducts])
+    setPage(page + 1)
+
   }
 
   return (
     <div className={style}>
-      {products?.map((product: ProductInterface) => {
-        return productSchema(product)
-      })}
       {
-        data
+        products != undefined
           ? (
-            data.map(product => {
+            products.map(product => {
               return productSchema(product)
-            })
+            })            
           )
           : ''
       }
+      {
+        !reqAPI
+          ? <ProductsSkeleton style={style}/>
+          : ''
+      }
+          
+      <InfiniteScrollComponent 
+        style={styles.loadProducts}
 
-      <InfiniteScrollComponent style={styles.loadProducts} reqData={handleData} />
+        reqData={reqAPI}
 
-    </div>
+        resData={handleShowProducts}
+      />
 
-    
+    </div>    
   )
 }
 

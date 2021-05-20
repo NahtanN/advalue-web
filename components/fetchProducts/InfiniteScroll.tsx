@@ -1,18 +1,4 @@
-import { useRouter } from 'next/dist/client/router'
-import { useEffect, useRef, useState } from 'react'
-import { useSWRInfinite } from 'swr'
-import getFilterUrl from '../../utils/getFilterUrl'
-import { ProductInterface } from '../products/Products'
-import { fetcher } from '../../hooks/useFetch'
-
-interface Products {
-  current_page: number;
-  prev_page: number;
-  next_page: number;
-  quantity: number;
-  data: Array<ProductInterface>;
-  Error?: String
-}
+import { useEffect, useRef } from 'react'
 
 /**
  * Returns a component responsible for infinite scroll
@@ -21,30 +7,7 @@ interface Products {
  * @param reqData - property that will be populated with the fetch data
  * @returns a invisible component responsible for handle the infinite scroll
  */
-const InfiniteScrollComponent = ({ style, reqData }) => {
-  const [page, setPage] = useState(0) // Handles the page number. Default value = 2
-  const [products, setProducts] = useState<Products[]>() // Handles the fetched data
-
-  const routes = useRouter()
-
-  useEffect(() => {
-    setPage(0)
-    setProducts([])
-  }, [routes.query])
-
-  // Fetch external data
-  const { data, size, setSize } = useSWRInfinite(
-    index => getFilterUrl(index + 1),
-    fetcher,
-    {
-      refreshInterval: 5
-    }
-  )
-
-  // When the fetch data is complete, pass it to the 'products' variable
-  useEffect(() => {
-    if (data) setProducts(data)
-  }, [data])
+const InfiniteScrollComponent = ({ style, reqData, resData }) => {
 
   // Create a mutable value that exists for the lifetime of the component instance
   // In this project, we gonna store the 'div' tag responsible for the infinite scroll
@@ -69,11 +32,11 @@ const InfiniteScrollComponent = ({ style, reqData }) => {
 
         // Avoid loading more than one time
         observer.disconnect()
-                    
-        if (products != undefined && products[page] && !products[page].Error) {
-          reqData(products[page].data)
-          setSize(size + 1)
-          setPage(page + 1)
+
+        if (reqData != undefined && !reqData.Error) {
+
+          resData(reqData.data)
+          
         }
 
       }
@@ -87,7 +50,7 @@ const InfiniteScrollComponent = ({ style, reqData }) => {
       observer.disconnect()
     }
 
-  }, [products])
+  }, [reqData])
 
   return (
     <div
