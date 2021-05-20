@@ -2,7 +2,7 @@
     margin-top: 5rem;
 }
 
-#back_to_top {
+.back_to_top {
     width: 100%;
     padding: 0.5rem 0;
 
@@ -18,7 +18,7 @@
     transition: all .2s;
 }
 
-#back_to_top:hover {
+.back_to_top:hover {
     background-color: slategrey;
 }
 

@@ -14,8 +14,9 @@ const Footer = () => {
   return (
     <div className={styles.container}>
       
-      <button 
-        id={styles.back_to_top}
+      <button
+        id='back_to_top'
+        className={styles.back_to_top}
         onClick={handleClickBackToTop}
       >
         Back to top
