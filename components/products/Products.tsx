@@ -8,6 +8,7 @@ import getFilterUrl from "../../utils/getFilterUrl"
 import InfiniteScrollComponent from "../fetchProducts/InfiniteScroll"
 import ProductsSkeleton from '../skeletons/productsSkeleton/ProductsSkeleton'
 import styles from './products.module.css'
+import ProductsNotFound from '../404Error/ProductsNotFound'
 
 interface RequestProducts {
   current_page: number;
@@ -79,7 +80,7 @@ const Products: React.FC<ComponentProps> = ({ style }) => {
   const [page, setPage] = useState(1)
   const [products, setProducts] = useState<ProductInterface[]>()
 
-  const { data: reqAPI, error } = useSWR<RequestProducts>(getFilterUrl(page), fetcher)
+  const { data: reqAPI } = useSWR<RequestProducts>(getFilterUrl(page), fetcher)
   
   useEffect(() => {
     
@@ -98,10 +99,17 @@ const Products: React.FC<ComponentProps> = ({ style }) => {
 
       setProducts(reqAPI.data)
       setPage(page + 1)
-      
+
     }
 
-  }, [reqAPI])  
+  }, [reqAPI])
+
+  const handleProductSchema = (reqAPI: RequestProducts) => {
+  
+    if (!reqAPI) return <ProductsSkeleton style={style} />
+  
+    if (reqAPI && reqAPI.Error && products === undefined) return <ProductsNotFound style={style} />
+  }
 
   const handleShowProducts = (newProducts: ProductInterface[]) => {    
 
@@ -122,9 +130,7 @@ const Products: React.FC<ComponentProps> = ({ style }) => {
           : ''
       }
       {
-        !reqAPI
-          ? <ProductsSkeleton style={style}/>
-          : ''
+        handleProductSchema(reqAPI)
       }
           
       <InfiniteScrollComponent 

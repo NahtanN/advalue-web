@@ -7,11 +7,6 @@ import AsideSkeleton from '../skeletons/asideSkeleton/AsideSkeleton'
 
 import styles from './aside.module.css';
 
-interface ISessionStorage {
-  product: string;
-  filter: string;
-  path: string;
-}
 
 interface CategoryInterface {
   name: string
@@ -34,19 +29,21 @@ export default function Aside({ style }) {
   // Triggered after every rendering
   useEffect(() => {
 
-    // Gets the filter categorie
-    const filterCategorie = sessionStorage.getItem('product')
+    try {
+      
+      // Gets the filter categorie
+      const filterCategorie = sessionStorage.getItem('product')
 
-    // If it is the first loading page or the pathname equals 'homepage', ignore
-    if (!filterCategorie || router.pathname === '/homepage' ) return
+      // If it is the first loading page or the pathname equals 'homepage', ignore
+      if (!filterCategorie || router.pathname === '/' || filterCategorie === 'index') return
 
-    // Changes the style of the selected category
-    if (filterCategorie != 'index') {
+      // Changes the style of the selected category
       const selectedTag = document.getElementById(filterCategorie)
-  
-        selectedTag.setAttribute('class', styles.selected_products)
 
-      }
+      selectedTag.setAttribute('class', styles.selected_products)
+
+    } catch (err) {}
+
     }
   )
 
@@ -82,7 +79,7 @@ export default function Aside({ style }) {
                 key={placeHolder}
               >
                 <Link href={{
-                  pathname: '/homepage/products/filter',
+                  pathname: '/products/filter',
                   query: {
                     ctg: placeHolder,
                     fil: getFilter

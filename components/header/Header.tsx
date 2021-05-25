@@ -11,7 +11,7 @@ const Header = () => {
     sessionStorage.setItem('filter', 'All-products')
     sessionStorage.setItem('product', 'index')
 
-    router.push('/homepage')
+    router.push('/')
   }
 
   return (
