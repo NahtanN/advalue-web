@@ -70,18 +70,18 @@ const productSchema = (product: ProductInterface) => {
  * Returns the products
  * 
  * @param style - className for styling
- * @param products - receive the products from the static generation
- * @param clientFetching - receive the products from the client fetching
  * @returns the products components
  */
 const Products: React.FC<ComponentProps> = ({ style }) => {
   
-  const { pathname, asPath } = useRouter()
-  const [page, setPage] = useState(1)
-  const [products, setProducts] = useState<ProductInterface[]>()
+  const { pathname, asPath } = useRouter() // Get current route
+  const [page, setPage] = useState(1) // Set page number
+  const [products, setProducts] = useState<ProductInterface[]>() // Define produts variable
 
+  // Fetch products from external API
   const { data: reqAPI } = useSWR<RequestProducts>(getFilterUrl(page), fetcher)
   
+  // When the route path changes, reset the products variable
   useEffect(() => {
     
     if (pathname != '/') {
@@ -93,6 +93,7 @@ const Products: React.FC<ComponentProps> = ({ style }) => {
     
   }, [asPath])
 
+  // Set products variable on the first load
   useEffect(() => {
 
     if(reqAPI && !reqAPI.Error && products == undefined) {
@@ -104,6 +105,8 @@ const Products: React.FC<ComponentProps> = ({ style }) => {
 
   }, [reqAPI])
 
+  // While the fetcher is loading, return a product skeleton
+  // If the data from fetcher is an Error, return a product not found component
   const handleProductSchema = (reqAPI: RequestProducts) => {
   
     if (!reqAPI) return <ProductsSkeleton style={style} />
@@ -111,6 +114,7 @@ const Products: React.FC<ComponentProps> = ({ style }) => {
     if (reqAPI && reqAPI.Error && products === undefined) return <ProductsNotFound style={style} />
   }
 
+  // Add new products to the 'products' variable and increment the 'page' variable
   const handleShowProducts = (newProducts: ProductInterface[]) => {    
 
     setProducts(prev => [...products, ...newProducts])
