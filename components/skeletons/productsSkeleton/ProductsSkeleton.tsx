@@ -1,5 +1,11 @@
 import styles from './productsSkeleton.module.css'
 
+/**
+ * Returns a loading skeleton
+ * 
+ * @param style - className for styling 
+ * @returns a loading skeleton
+ */
 const ProductsSkeleton = ({ style }) => {
   return (
     <div className={style}>

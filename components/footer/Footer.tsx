@@ -1,16 +1,32 @@
+import { useRouter } from 'next/dist/client/router'
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaCcVisa, FaCcMastercard, FaCcPaypal, FaBitcoin } from 'react-icons/fa'
 
 import styles from './footer.module.css'
 
 const Footer = () => {
+
+  const router = useRouter()
+
+  const handleBackToHome = () => {
+    sessionStorage.setItem('filter', 'All-products')
+    sessionStorage.setItem('product', 'index')
+
+    router.push('/')
+  }
+
   const handleClickBackToTop = () => {
-    window.scrollTo(0, 0)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
   }
 
   return (
     <div className={styles.container}>
-      <button 
-        id={styles.back_to_top}
+      
+      <button
+        id='back_to_top'
+        className={styles.back_to_top}
         onClick={handleClickBackToTop}
       >
         Back to top
@@ -19,7 +35,7 @@ const Footer = () => {
       <footer className={styles.main_footer}>      
         <section className={styles.social}>
           <div>
-            <h1>Vital</h1>
+            <h1 onClick={handleBackToHome}>Vital</h1>
           </div>
 
           <div>
