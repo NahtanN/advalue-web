@@ -54,7 +54,7 @@ const Footer = () => {
 
         <section className={styles.info}>
           <div id={styles.usage}>
-            <p><small>@ 2021. Vital UI kit</small></p>
+            <p><small>@ 2021. AdValue UI kit</small></p>
             <p><small>Privacy Policy</small></p>
             <p><small>Terms of Use</small></p>
           </div>
