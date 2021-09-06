@@ -19,7 +19,7 @@ const Header = () => {
       <div className={styles.container}>
         <section className={styles.logo} onClick={handleLogoClick}>
           <FaCrown size={40}/>
-          <h1>Vital</h1>
+          <h1>AdValue</h1>
         </section>
 
         <section className={styles.search}>

@@ -5,7 +5,7 @@ const Filter = () => {
     return (
         
         // Default layout for the web site
-        <PageLayout head={'Vital - Home'} />
+        <PageLayout head={'AdValue - Home'} />
     )
 }
 

@@ -35,7 +35,7 @@ const Footer = () => {
       <footer className={styles.main_footer}>      
         <section className={styles.social}>
           <div>
-            <h1 onClick={handleBackToHome}>Vital</h1>
+            <h1 onClick={handleBackToHome}>AdValue</h1>
           </div>
 
           <div>
